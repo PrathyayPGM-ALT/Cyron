@@ -1,18 +1,3 @@
-/* ============================================================================
-   Cyron  —  a tiny interpreted language: Python's heart, C's curly braces.
-
-     - Curly braces for blocks, NO semicolons (newline ends a statement)
-     - Indentation never matters
-     - No manual memory management, no leaks: every allocation the
-       interpreter makes is tracked and released before exit
-     - Variables (let), functions (fn), classes with inheritance (class A : B),
-       lists, strings, if/elif/else, while, for-in, closures, and ~24 builtins
-
-   Build:   gcc cyron.c -o cyron.exe -O2 -lm
-   Run:     cyron program.cy        (or run with no args for a REPL)
-
-   File extension: .cy
-   ============================================================================ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,9 +11,7 @@
 #define CYRON_VERSION "1.0"
 #define MAX_CALL_DEPTH  1800
 
-/* ============================ tracked memory ================================
-   Every heap block goes through xmalloc and is chained into a global list.
-   free_all_memory() walks the list at exit, so nothing is ever leaked.       */
+
 
 typedef struct AllocHdr { struct AllocHdr *next; } AllocHdr;
 static AllocHdr *g_allocs = NULL;
